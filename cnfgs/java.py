@@ -13,7 +13,7 @@ class orgSTJava:
         if self.Build() == 0: return 0
     def chkjava(self):
         result = run(['java', '--version'],
-                                capture_output=True, text=True, stdout=sys.stdout, stderr=sys.stderr)
+                                capture_output=True, text=True)
 
         output = result.stdout.strip().splitlines()
 
