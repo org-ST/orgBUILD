@@ -23,7 +23,7 @@ class orgSTJava:
             if part[0].isdigit():
                 major_version = part.split('.')[0]
                 print("Major Java version:", major_version)
-                return major_version
+                return int(major_version)
     def chkmvn(self):
         if run(["mvn", "--version"], check=True, stdout=sys.stdout, stderr=sys.stderr).returncode != 0:
             shared.err("Failed to locate Maven, please install Maven")
