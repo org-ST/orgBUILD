@@ -27,6 +27,9 @@ def main():
             orgDir = sys.argv[i+1]
         elif (sys.argv[i] == "-DCMAKE_ARGS_FILE"):
             cmake_args_file = sys.argv[i+1]
+        elif (sys.argv[i] == "-clean"):
+            import clean
+            clean.clean(orgDir)
     if cpp:
         import configs
         if cmake_args_file != None:
