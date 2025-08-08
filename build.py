@@ -33,7 +33,7 @@ def main():
             with open(cmake_args_file, 'r') as file:
                 configs.RunPP(orgDir, file.read())
         else:
-            configs.RunPP(orgDir)
+            configs.RunPP(orgDir, "")
     if java:
         import configs
         configs.RunJAVA(orgDir)

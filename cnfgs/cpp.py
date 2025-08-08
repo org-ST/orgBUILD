@@ -32,6 +32,8 @@ class orgSTpp :
              shared.err("User chose to not update, exiting")
     def RunCmake(self):
          print("Building orgST++")
+         if self.cmake_args != "":
+              cmakeres = run(["cmake", "-G", "Ninja", "-B", f"{self.orgDir}/orgST++/build", "-S", f"{self.orgDir}/orgST++", self.cmake_args.split(' ')], capture_output=True, check=True)
          cmakeres = run(["cmake", "-G", "Ninja", "-B", f"{self.orgDir}/orgST++/build", "-S", f"{self.orgDir}/orgST++"], capture_output=True, check=True)
          if (cmakeres.returncode != 0):
               print("Configuration via CMake failed")
