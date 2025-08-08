@@ -26,5 +26,8 @@ def main():
     if cpp:
         import configs
         configs.RunPP(orgDir)
+    if java:
+        import configs
+        configs.RunJAVA(orgDir)
 if __name__ == "__main__":
     main()

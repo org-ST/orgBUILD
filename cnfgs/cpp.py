@@ -20,8 +20,8 @@ class orgSTpp :
              print("Couldn't find CryptoPP which is required for orgST++")
              self.UpdateMods()
         self.checkTools()
-        self.RunCmake()
-        return 0
+        buildres = self.RunCmake()
+        return buildres
     def UpdateMods(self):
         gethttplib = input("Would you like to ensure required libraries now? [Y/N]: ")
         if (gethttplib.lower == "y"):
@@ -29,8 +29,16 @@ class orgSTpp :
         else:
              shared.err("User chose to not update, exiting")
     def RunCmake(self):
-         run(["cmake", "-G", "Ninja", "-B", f"{self.orgDir}/orgST++/build", "-S", f"{self.orgDir}/orgST++"])
-         run(["ninja", "-C", f"{self.orgDir}/orgST++/build"])
+         print("Building orgST++")
+         cmakeres = run(["cmake", "-G", "Ninja", "-B", f"{self.orgDir}/orgST++/build", "-S", f"{self.orgDir}/orgST++"], capture_output=True, check=True)
+         if (cmakeres.returncode != 0):
+              print("Configuration via CMake failed")
+              return 5
+         ninjares = run(["ninja", "-C", f"{self.orgDir}/orgST++/build"], capture_output=True, check=True)
+         if (ninjares.returncode != 0):
+              print("Building via Ninja failed")
+              return 5
+         return 0
     def checkTools():
         cmakeres = run(["cmake", "--version"], capture_output=True, check=True)
         if cmakeres.returncode == 0:

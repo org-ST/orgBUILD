@@ -1,0 +1,39 @@
+import os
+from subprocess import run
+import shared
+
+class orgSTJava:
+    orgDir = ""
+    def __init__(self, orgDir):
+        print("Initialzing orgST Java")
+        self.orgDir = orgDir
+        if self.chkjava() != 21: shared.err("orgST Java required Java 21 or Later")
+        if self.chkmvn() == 0: print("Found Maven")
+        if self.Build() == 0: return 0
+    def chkjava():
+        result = run(['java', '--version'],
+                                capture_output=True, text=True)
+
+        output = result.stdout.strip().splitlines()
+
+        first_line = output[0]
+
+        for part in first_line.split():
+            if part[0].isdigit():
+                major_version = part.split('.')[0]
+                print("Major Java version:", major_version)
+                return major_version
+    def chkmvn():
+        if run(["mvn", "--version"], capture_output=True, check=True).returncode != 0:
+            shared.err("Failed to locate Maven, please install Maven")
+        else:
+            return 0
+    def Build(self):
+        currdir = os.path.curdir
+        os.chdir(self.orgDir)
+        if run(["mvn", "package"], capture_output=True, check=True) != 0:
+            os.chdir(currdir)
+            shared.err("Failed to build orgST Java")
+        else:
+            os.chdir(currdir)
+            return 0
