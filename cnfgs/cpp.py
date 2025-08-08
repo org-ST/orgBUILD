@@ -4,7 +4,9 @@ import shared
 
 class orgSTpp :
     orgDir = ""
-    def __init__(self, orgdir):
+    cmake_args = ""
+    def __init__(self, orgdir, cmake_args):
+        self.cmake_args = cmake_args
         self.orgDir = orgdir
         print("Initializing orgST++")
         print(f"orgST Directory is: {self.orgDir}")

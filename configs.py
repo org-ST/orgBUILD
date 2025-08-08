@@ -1,6 +1,6 @@
-def RunPP(orgDir):
+def RunPP(orgDir, cmake_args):
     import cnfgs.cpp
-    orgstpp = cnfgs.cpp.orgSTpp(orgDir)
+    orgstpp = cnfgs.cpp.orgSTpp(orgDir, cmake_args)
     if orgstpp == 0:
         print("Succesfully Built orgST++")
     else:
