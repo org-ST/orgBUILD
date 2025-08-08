@@ -25,14 +25,14 @@ class orgSTJava:
                 print("Major Java version:", major_version)
                 return major_version
     def chkmvn(self):
-        if run(["mvn", "--version"], capture_output=True, check=True, stdout=sys.stdout, stderr=sys.stderr).returncode != 0:
+        if run(["mvn", "--version"], check=True, stdout=sys.stdout, stderr=sys.stderr).returncode != 0:
             shared.err("Failed to locate Maven, please install Maven")
         else:
             return 0
     def Build(self):
         currdir = os.path.curdir
         os.chdir(self.orgDir)
-        if run(["mvn", "package"], capture_output=True, check=True, stdout=sys.stdout, stderr=sys.stderr) != 0:
+        if run(["mvn", "package"], check=True, stdout=sys.stdout, stderr=sys.stderr) != 0:
             os.chdir(currdir)
             shared.err("Failed to build orgST Java")
         else:
