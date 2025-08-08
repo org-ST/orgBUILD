@@ -1,6 +1,7 @@
 import os
 from subprocess import run
 import shared
+import sys
 
 class orgSTJava:
     orgDir = ""
@@ -12,7 +13,7 @@ class orgSTJava:
         if self.Build() == 0: return 0
     def chkjava(self):
         result = run(['java', '--version'],
-                                capture_output=True, text=True)
+                                capture_output=True, text=True, stdout=sys.stdout, stderr=sys.stderr)
 
         output = result.stdout.strip().splitlines()
 
@@ -24,14 +25,14 @@ class orgSTJava:
                 print("Major Java version:", major_version)
                 return major_version
     def chkmvn(self):
-        if run(["mvn", "--version"], capture_output=True, check=True).returncode != 0:
+        if run(["mvn", "--version"], capture_output=True, check=True, stdout=sys.stdout, stderr=sys.stderr).returncode != 0:
             shared.err("Failed to locate Maven, please install Maven")
         else:
             return 0
     def Build(self):
         currdir = os.path.curdir
         os.chdir(self.orgDir)
-        if run(["mvn", "package"], capture_output=True, check=True) != 0:
+        if run(["mvn", "package"], capture_output=True, check=True, stdout=sys.stdout, stderr=sys.stderr) != 0:
             os.chdir(currdir)
             shared.err("Failed to build orgST Java")
         else:

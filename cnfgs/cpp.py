@@ -1,6 +1,7 @@
 import os
 from subprocess import run
 import shared
+import sys
 
 class orgSTpp :
     orgDir = ""
@@ -27,29 +28,29 @@ class orgSTpp :
     def UpdateMods(self):
         gethttplib = input("Would you like to ensure required libraries now? [Y/N]: ")
         if (gethttplib.lower == "y"):
-                run(["git", "submodule", "update", "--init", "--recursive"], cwd={self.orgDir}, check=True)
+                run(["git", "submodule", "update", "--init", "--recursive"], cwd={self.orgDir}, check=True, stdout=sys.stdout, stderr=sys.stderr)
         else:
              shared.err("User chose to not update, exiting")
     def RunCmake(self):
          print("Building orgST++")
          if self.cmake_args != "":
-              cmakeres = run(["cmake", "-G", "Ninja", "-B", f"{self.orgDir}/orgST++/build", "-S", f"{self.orgDir}/orgST++", *self.cmake_args.split(' ')], capture_output=True, check=True)
-         cmakeres = run(["cmake", "-G", "Ninja", "-B", f"{self.orgDir}/orgST++/build", "-S", f"{self.orgDir}/orgST++"], capture_output=True, check=True)
+              cmakeres = run(["cmake", "-G", "Ninja", "-B", f"{self.orgDir}/orgST++/build", "-S", f"{self.orgDir}/orgST++", *self.cmake_args.split(' ')], capture_output=True, check=True, stdout=sys.stdout, stderr=sys.stderr)
+         cmakeres = run(["cmake", "-G", "Ninja", "-B", f"{self.orgDir}/orgST++/build", "-S", f"{self.orgDir}/orgST++"], capture_output=True, check=True, stdout=sys.stdout, stderr=sys.stderr)
          if (cmakeres.returncode != 0):
               print("Configuration via CMake failed")
               return 5
-         ninjares = run(["ninja", "-C", f"{self.orgDir}/orgST++/build"], capture_output=True, check=True)
+         ninjares = run(["ninja", "-C", f"{self.orgDir}/orgST++/build"], capture_output=True, check=True, stdout=sys.stdout, stderr=sys.stderr)
          if (ninjares.returncode != 0):
               print("Building via Ninja failed")
               return 5
          return 0
     def checkTools(self):
-        cmakeres = run(["cmake", "--version"], capture_output=True, check=True)
+        cmakeres = run(["cmake", "--version"], capture_output=True, check=True, stdout=sys.stdout, stderr=sys.stderr)
         if cmakeres.returncode == 0:
              print("Found CMake")
         else:
              shared.err("CMake not found, please install CMake")
-        ninjares = run(["ninja", "--version"], capture_output=True, check=True)
+        ninjares = run(["ninja", "--version"], capture_output=True, check=True, stdout=sys.stdout, stderr=sys.stderr)
         if ninjares.returncode == 0:
              print("Found Ninja")
         else:
