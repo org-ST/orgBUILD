@@ -30,6 +30,7 @@ def main():
         elif (sys.argv[i] == "-clean"):
             import clean
             clean.clean(orgDir)
+            exit(0)
     if cpp:
         import configs
         if cmake_args_file != None:
