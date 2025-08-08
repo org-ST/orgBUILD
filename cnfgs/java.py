@@ -10,7 +10,7 @@ class orgSTJava:
         self.orgDir = orgDir
         if self.chkjava() != 21: shared.err("orgST Java required Java 21 or Later")
         if self.chkmvn() == 0: print("Found Maven")
-        if self.Build() == 0: return 0
+        if self.Build() == 0: return None
     def chkjava(self):
         result = run(['java', '--version'],
                                 capture_output=True, text=True)

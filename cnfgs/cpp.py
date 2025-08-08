@@ -23,8 +23,9 @@ class orgSTpp :
              print("Couldn't find CryptoPP which is required for orgST++")
              self.UpdateMods()
         self.checkTools()
-        buildres = self.RunCmake()
-        return buildres
+        if self.RunCmake() != 0:
+             shared.err("Failed to build orgST++")
+        return None
     def UpdateMods(self):
         gethttplib = input("Would you like to ensure required libraries now? [Y/N]: ")
         if (gethttplib.lower == "y"):
