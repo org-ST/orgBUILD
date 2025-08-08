@@ -32,7 +32,7 @@ class orgSTJava:
     def Build(self):
         currdir = os.path.curdir
         os.chdir(self.orgDir)
-        if run(["mvn", "package"], check=True, stdout=sys.stdout, stderr=sys.stderr) != 0:
+        if run(["mvn", "package"], check=True, stdout=sys.stdout, stderr=sys.stderr).returncode != 0:
             os.chdir(currdir)
             shared.err("Failed to build orgST Java")
         else:
