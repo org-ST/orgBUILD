@@ -6,8 +6,9 @@ java = True
 cpp = True
 
 def main():
+    global java, cpp, orgDir
     print("Welcome to orgBUILD")
-    for i in sys.argv:
+    for i in range(len(sys.argv)):
         if (sys.argv[i] == "-java"):
             print("Only build Java")
             cpp = False
