@@ -9,12 +9,12 @@ class orgSTpp :
         print("Initializing orgST++")
         print(f"orgST Directory is: {self.orgDir}")
         print("Ensuring Libraries")
-        if os.path.isdir({self.orgDir}+"/orgST++/third-party/cpp-httplib"):
+        if os.path.isdir(f"{self.orgDir}/orgST++/third-party/cpp-httplib"):
             print("Detected cpp-httplib for orgST++")
         else:
             print("Couldn't find cpp-httplib which is required for orgST++")
             self.UpdateMods()
-        if os.path.isdir({self.orgDir}+"/orgST++/third-party/CryptoPP"):
+        if os.path.isdir(f"{self.orgDir}/orgST++/third-party/CryptoPP"):
              print("Detected CryptoPP for orgST++")
         else:
              print("Couldn't find CryptoPP which is required for orgST++")
