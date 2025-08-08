@@ -10,7 +10,7 @@ class orgSTJava:
         if self.chkjava() != 21: shared.err("orgST Java required Java 21 or Later")
         if self.chkmvn() == 0: print("Found Maven")
         if self.Build() == 0: return 0
-    def chkjava():
+    def chkjava(self):
         result = run(['java', '--version'],
                                 capture_output=True, text=True)
 
@@ -23,7 +23,7 @@ class orgSTJava:
                 major_version = part.split('.')[0]
                 print("Major Java version:", major_version)
                 return major_version
-    def chkmvn():
+    def chkmvn(self):
         if run(["mvn", "--version"], capture_output=True, check=True).returncode != 0:
             shared.err("Failed to locate Maven, please install Maven")
         else:

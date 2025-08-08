@@ -39,7 +39,7 @@ class orgSTpp :
               print("Building via Ninja failed")
               return 5
          return 0
-    def checkTools():
+    def checkTools(self):
         cmakeres = run(["cmake", "--version"], capture_output=True, check=True)
         if cmakeres.returncode == 0:
              print("Found CMake")
