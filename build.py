@@ -1,4 +1,7 @@
 import sys
+from subprocess import run
+import time
+import shared
 
 orgDir = "../"
 
@@ -31,6 +34,12 @@ def main():
             import clean
             clean.clean(orgDir)
             exit(0)
+        elif (sys.argv[i] == "-git"):
+            msg = "Update: " + time.strftime("%a %d %b %Y %H:%M:%S %Z")
+            if run(["git", "commit", "-a", "-m", msg], check=True, stdout=sys.stdout, stderr=sys.stderr).returncode == 0:
+                run(["git", "push", "origin", "main"])
+            else:
+                shared.err("Commit Failed")
     if cpp:
         import configs
         if cmake_args_file != None:
