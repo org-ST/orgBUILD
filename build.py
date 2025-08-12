@@ -38,6 +38,7 @@ def main():
             msg = "Update: " + time.strftime("%a %d %b %Y %H:%M:%S %Z")
             if run(["git", "commit", "-a", "-m", msg], check=True, stdout=sys.stdout, stderr=sys.stderr).returncode == 0:
                 run(["git", "push", "origin", "main"])
+                exit(0)
             else:
                 shared.err("Commit Failed")
     if cpp:
